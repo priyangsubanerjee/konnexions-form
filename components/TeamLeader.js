@@ -43,7 +43,7 @@ function TeamLeader({ step, setStep, form, setForm }) {
             onChange={(e) => {
               setForm({ ...form, leaderName: e.target.value });
             }}
-            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 outline-none"
+            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 lg:mt-0 outline-none"
           />
         </div>
         <div className="lg:mt-7 lg:h-20 bg-slate-50 flex flex-col lg:flex-row lg:items-center justify-between p-4 lg:p-3 rounded-md lg:space-x-4">
@@ -56,7 +56,7 @@ function TeamLeader({ step, setStep, form, setForm }) {
             onChange={(e) => {
               setForm({ ...form, leaderEmail: e.target.value });
             }}
-            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 outline-none"
+            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 lg:mt-0 outline-none"
           />
         </div>
         <div className="lg:mt-7 lg:h-20 bg-slate-50 flex flex-col lg:flex-row lg:items-center justify-between p-4 lg:p-3 rounded-md lg:space-x-4">
@@ -69,7 +69,7 @@ function TeamLeader({ step, setStep, form, setForm }) {
             onChange={(e) => {
               setForm({ ...form, leaderRoll: e.target.value });
             }}
-            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 outline-none"
+            className="lg:w-[70%] h-12 lg:h-full bg-white border border-slate-200 rounded-md flex items-center px-6 mt-2 lg:mt-0 outline-none"
           />
         </div>
       </div>
