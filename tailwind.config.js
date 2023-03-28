@@ -13,6 +13,10 @@ module.exports = withMT({
     extend: {
       backgroundColor: {
         "slate-primary": "#111827",
+        "slate-seconday": "#111827",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },

@@ -6,21 +6,23 @@ const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPH, {
   },
 });
 
-const addResponse = async (formData) => {
+const addResponse = async (data) => {
+  const formData = JSON.parse(data);
+
   const mutation = gql`
     mutation MyMutation {
       createResponse(
         data: {
           domain: "${formData.domain}"
-          leadEmailId: "${formData.leadEmailId}"
-          leadName: "${formData.leadName}"
-          leadRoll: "${formData.leadRollNumber}"
+          leadEmailId: "${formData.teamLeaderEmail}"
+          leadName: "${formData.teamLeaderName}"
+          leadRoll: "${formData.teamLeaderRoll}"
           member2Email: "${formData.member2Email}"
           member2Name: "${formData.member2Name}"
-          member3Email: "${formData.member3Email}}"
-          member3Name: "${formData.member3Name}}"
-          member3Roll: "${formData.member3Roll}"
           member2Roll: "${formData.member2Roll}"
+          member3Email: "${formData.member3Email}"
+          member3Name: "${formData.member3Name}"
+          member3Roll: "${formData.member3Roll}"
         }
       ) {
         id
@@ -29,13 +31,15 @@ const addResponse = async (formData) => {
   `;
 
   try {
-    const data = await client.request(mutation);
+    const { createResponse } = await client.request(mutation);
+    console.log(createResponse);
     return {
       success: true,
       message: "Response added successfully",
-      data: data.createResponse,
+      data: createResponse,
     };
   } catch (error) {
+    console.log(error);
     return {
       success: false,
       message: error.response.errors[0].message,
