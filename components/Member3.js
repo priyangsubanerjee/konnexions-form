@@ -108,6 +108,18 @@ function Member3({ step, setStep, form, setForm, loading, setLoading }) {
             if (res.success) {
               setLoading(false);
               toast.success("Registration successful");
+              setForm({
+                domain: "",
+                leaderName: "",
+                leaderRoll: "",
+                leaderEmail: "",
+                member2Name: "",
+                member2Roll: "",
+                member2Email: "",
+                member3Name: "",
+                member3Roll: "",
+                member3Email: "",
+              });
             } else {
               setLoading(false);
               toast.error(res.message);
