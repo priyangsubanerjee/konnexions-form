@@ -4,7 +4,7 @@ function ChooseDomain({ setStep, step, form, setForm }) {
   const [chooseDomain, setChooseDomain] = useState(false);
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-800 w-fit">
+      <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 w-fit">
         Choose your <span className="text-indigo-500">domain</span>
       </h1>
       <div className="mt-7 lg:h-20 bg-slate-50 flex flex-col lg:flex-row lg:items-center justify-between p-4 lg:p-3 rounded-md lg:space-x-4">
