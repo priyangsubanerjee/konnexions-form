@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="lg:h-screen w-screen overflow-auto lg:overflow-hidden fixed inset-0 bg-white lg:flex lg:items-center">
       <div className="lg:block lg:w-[700px] shrink-0 bg-transparent lg:h-full lg:overflow-hidden lg:p-8">
-        <div className="bg-slate-100 w-full h-full rounded-xl overflow-hidden pb-8">
+        <div className="bg-slate-100 w-full h-full lg:rounded-xl overflow-hidden pb-8">
           <div className="flex items-center justify-center p-6">
             <img
               src="https://blog.hyperiondev.com/wp-content/uploads/2019/02/Blog-Tech-Events.jpg"
