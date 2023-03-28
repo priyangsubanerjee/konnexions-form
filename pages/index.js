@@ -92,6 +92,18 @@ export default function Home() {
     const resp = await addResponse(JSON.stringify(form));
     if (resp.success) {
       toast.success("Form submitted successfully");
+      setForm({
+        domain: "",
+        teamLeaderName: "",
+        teamLeaderEmail: "",
+        teamLeaderRoll: "",
+        member2Name: "",
+        member2Email: "",
+        member2Roll: "",
+        member3Name: "",
+        member3Email: "",
+        member3Roll: "",
+      });
     } else {
       // find key wrapped in double quotes
       const key = resp.message.match(/"(.*?)"/)[1];
