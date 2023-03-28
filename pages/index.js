@@ -9,9 +9,11 @@ import ChooseDomain from "@/components/ChooseDomain";
 import TeamLeader from "@/components/TeamLeader";
 import Member2 from "@/components/Member2";
 import Member3 from "@/components/Member3";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     domain: "",
     leaderName: "",
@@ -148,10 +150,13 @@ export default function Home() {
               step={step}
               form={form}
               setForm={setForm}
+              loading={loading}
+              setLoading={setLoading}
             />
           )}
         </div>
       </div>
+      <Loading visible={loading} />
     </div>
   );
 }

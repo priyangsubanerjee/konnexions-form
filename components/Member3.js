@@ -1,7 +1,8 @@
 import { addResponse } from "@/helper/graph";
 import React, { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 
-function Member3({ step, setStep, form, setForm }) {
+function Member3({ step, setStep, form, setForm, loading, setLoading }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [canProceed, setCanProceed] = useState(false);
   useEffect(() => {
@@ -102,8 +103,15 @@ function Member3({ step, setStep, form, setForm }) {
         <button
           disabled={!canProceed}
           onClick={async () => {
+            setLoading(true);
             const res = await addResponse(JSON.stringify(form));
-            console.log(res);
+            if (res.success) {
+              setLoading(false);
+              toast.success("Registration successful");
+            } else {
+              setLoading(false);
+              toast.error(res.message);
+            }
           }}
           className="flex disabled:opacity-50 items-center space-x-3 bg-indigo-500 hover:bg-indigo-600 shadow px-4 py-3 text-white rounded transition-all duration-200 text-sm"
         >

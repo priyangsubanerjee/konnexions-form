@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
 function ChooseDomain({ setStep, step, form, setForm }) {
   const [chooseDomain, setChooseDomain] = useState(false);
