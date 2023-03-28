@@ -115,7 +115,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-fit lg:h-full overflow-hidden pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
+      <div className="w-full min-h-screen lg:h-full overflow-hidden pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
         <div className="flex uppercase justify-between">
           <span className="text-xs tracking-widest">REGISTER</span>
           <span className="text-xs tracking-widest">STEP {step} / 4</span>
