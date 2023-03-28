@@ -3,410 +3,155 @@ import { addResponse } from "@/helper/graph";
 import Head from "next/head";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import ChooseDomain from "@/components/ChooseDomain";
+import TeamLeader from "@/components/TeamLeader";
+import Member2 from "@/components/Member2";
+import Member3 from "@/components/Member3";
 
 export default function Home() {
-  const [chooseDomainOpen, setChooseDomainOpen] = useState(false);
-  const domains = ["Web development", "App development", "Machine learning"];
+  const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     domain: "",
-    teamLeaderName: "",
-    teamLeaderEmail: "",
-    teamLeaderRoll: "",
+    leaderName: "",
+    leaderRoll: "",
+    leaderEmail: "",
     member2Name: "",
-    member2Email: "",
     member2Roll: "",
+    member2Email: "",
     member3Name: "",
-    member3Email: "",
     member3Roll: "",
+    member3Email: "",
   });
-  const handleSubmit = async () => {
-    if (form.domain.length == 0) {
-      toast.error("Please select a domain");
-      return;
-    }
-    if (form.teamLeaderName.length == 0) {
-      toast.error("Please enter team leader name");
-      document.getElementById("teamLeaderName").focus();
-      return;
-    } else if (form.teamLeaderRoll.length == 0) {
-      toast.error("Please enter team leader roll");
-      document.getElementById("teamLeaderRoll").focus();
-      return;
-    } else if (form.teamLeaderEmail.length == 0) {
-      toast.error("Please enter team leader email");
-      document.getElementById("teamLeaderEmail").focus();
-      return;
-    } else if (
-      form.teamLeaderEmail.length !== 0 &&
-      !form.teamLeaderEmail.includes("@kiit.ac.in")
-    ) {
-      toast.error("Please enter a valid kiit email");
-      document.getElementById("teamLeaderEmail").focus();
-      return;
-    }
-
-    // member 2
-    else if (form.member2Name.length == 0) {
-      toast.error("Please enter member 2 name");
-      document.getElementById("member2Name").focus();
-      return;
-    } else if (form.member2Roll.length == 0) {
-      toast.error("Please enter member 2 roll");
-      document.getElementById("member2Roll").focus();
-      return;
-    } else if (form.member2Email.length == 0) {
-      toast.error("Please enter member 2 email");
-      document.getElementById("member2Email").focus();
-      return;
-    } else if (
-      form.member2Email.length !== 0 &&
-      !form.member2Email.includes("@kiit.ac.in")
-    ) {
-      toast.error("Please enter a valid kiit email");
-      document.getElementById("member2Email").focus();
-      return;
-    }
-
-    // member 3
-    else if (form.member3Name.length == 0) {
-      toast.error("Please enter member 3 name");
-      document.getElementById("member3Name").focus();
-      return;
-    } else if (form.member3Roll.length == 0) {
-      toast.error("Please enter member 3 roll");
-      document.getElementById("member3Roll").focus();
-      return;
-    } else if (form.member3Email.length == 0) {
-      toast.error("Please enter member 3 email");
-      document.getElementById("member3Email").focus();
-      return;
-    } else if (
-      form.member3Email.length !== 0 &&
-      !form.member3Email.includes("@kiit.ac.in")
-    ) {
-      toast.error("Please enter a valid kiit email");
-      document.getElementById("member3Email").focus();
-      return;
-    }
-
-    const resp = await addResponse(JSON.stringify(form));
-    if (resp.success) {
-      toast.success("Form submitted successfully");
-      setForm({
-        domain: "",
-        teamLeaderName: "",
-        teamLeaderEmail: "",
-        teamLeaderRoll: "",
-        member2Name: "",
-        member2Email: "",
-        member2Roll: "",
-        member3Name: "",
-        member3Email: "",
-        member3Roll: "",
-      });
-    } else {
-      // find key wrapped in double quotes
-      const key = resp.message.match(/"(.*?)"/)[1];
-      switch (key) {
-        case "leadEmail":
-          toast.error("Team leader email already exists");
-          document.getElementById("teamLeaderEmail").focus();
-          break;
-        case "leadRoll":
-          toast.error("Team leader roll already exists");
-          document.getElementById("teamLeaderRoll").focus();
-          break;
-        case "member2Email":
-          toast.error("Member 2 email already exists");
-          document.getElementById("member2Email").focus();
-          break;
-        case "member2Roll":
-          toast.error("Member 2 roll already exists");
-          document.getElementById("member2Roll").focus();
-          break;
-        case "member3Email":
-          toast.error("Member 3 email already exists");
-          document.getElementById("member3Email").focus();
-          break;
-        case "member3Roll":
-          toast.error("Member 3 roll already exists");
-          document.getElementById("member3Roll").focus();
-          break;
-        default:
-          toast.error("Something went wrong");
-          break;
-      }
-    }
-  };
   return (
-    <div className="lg:h-screen w-screen lg:flex bg-[#1c1d21] scrollbar-hide">
-      <div className="lg:w-[500px] shrink-0 h-full bg-[#111213]">
-        <div className="p-0 relative">
-          <img
-            src="https://s35764.pcdn.co/wp-content/uploads/2021/09/tech2-1024x630.png"
-            alt=""
-            className="rounded-md h-60 w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111213]"></div>
-        </div>
-        <div className="p-10">
-          <h1 className="text-2xl font-montserrat text-gray-100 font-bold ">
-            Tech event 2023
-          </h1>
-          <p className="text-sm text-gray-400 leading-8 mt-4 font-montserrat">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
-            aperiam necessitatibus eos quos, doloribus ullam id, quas assumenda
-            autem labore maxime. Cupiditate est esse pariatur, reiciendis quis
-            illo temporibus.
-          </p>
-          <p className="text-sm text-gray-400 leading-8 mt-4 font-montserrat">
-            <strong className="text-gray-200">Date:</strong> 12th December 2023
-          </p>
-          <p className="text-sm text-gray-400 leading-8 mt-4 font-montserrat">
-            <strong className="text-gray-200">Venue:</strong> Campus 14
-          </p>
-          <button className=" border text-white px-4 py-3 text-sm mt-7">
-            Contact us
-          </button>
-        </div>
-      </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-        className="w-full px-0 py-8 lg:p-20 lg:h-screen lg:overflow-auto scrollbar-hide"
-      >
-        <h1 className="ml-6 uppercase text-3xl font-montserrat font-bold text-white border-b w-fit pb-2">
-          Register
-        </h1>
-        <div className="mt-16 bg-black/10 px-6 py-7 font-montserrat select-none">
-          <div>
-            <span className="text-gray-300 font-semibold ">
-              Choose your domain
-            </span>
+    <div className="lg:h-screen w-screen overflow-auto lg:overflow-hidden fixed inset-0 bg-white lg:flex lg:items-center">
+      <div className="lg:block lg:w-[700px] shrink-0 bg-transparent lg:h-full lg:overflow-hidden lg:p-8">
+        <div className="bg-slate-100 w-full h-full rounded-xl overflow-hidden pb-8">
+          <div className="flex items-center justify-center p-6">
+            <img
+              src="https://blog.hyperiondev.com/wp-content/uploads/2019/02/Blog-Tech-Events.jpg"
+              alt=""
+              className="w-[100%] h-[250px] object-cover rounded-xl shadow-slate-300"
+            />
           </div>
-          <div className="flex justify-end mt-5 lg:mt-0">
-            <div className="w-full lg:w-96">
-              <div
-                className={`h-14 ${
-                  chooseDomainOpen ? "bg-white/10" : "bg-white/5"
-                } rounded-md flex items-center px-6 ${
-                  form.domain.length == 0 ? "text-white/50" : "text-white"
-                }`}
-              >
-                <span
-                  className="h-full flex items-center w-full"
-                  onClick={() => setChooseDomainOpen(!chooseDomainOpen)}
-                >
-                  {form.domain.length == 0 ? "Select domain" : form.domain}
-                </span>
+          <div className="px-8 mt-5">
+            <h1 className="text-2xl font-semibold text-slate-800">
+              An amazing event name here !
+            </h1>
+            <p className="text-sm leading-7 text-slate-600 mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ea
+              vero nemo aspernatur neque nam quam consectetur tempora, quas
+              nobis impedit quisquam repudiandae molestiae? Quam ducimus
+              similique expedita aperiam delectus.
+            </p>
+            <div className="mt-7 space-y-5">
+              <div className="flex items-center space-x-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  onClick={() => setChooseDomainOpen(!chooseDomainOpen)}
-                  stroke="currentColor"
-                  class={`w-4 h-4 ml-auto shrink-0 ${
-                    chooseDomainOpen ? "rotate-180" : "rotate-0"
-                  } transition-all`}
+                  fill="currentColor"
+                  class="w-6 h-6"
                 >
+                  <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    fill-rule="evenodd"
+                    d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
+                    clip-rule="evenodd"
                   />
                 </svg>
+                <span className="text-sm text-slate-700">
+                  20th - 21st march 2023
+                </span>
               </div>
-              <div className="relative">
-                {chooseDomainOpen && (
-                  <div className="absolute top-0 inset-x-0">
-                    <div className="bg-[#100f14] rounded-md shadow-2xl mt-2 h-44 w-full">
-                      <ul className="p-3">
-                        {domains.map((domain, index) => {
-                          return (
-                            <li
-                              key={index}
-                              onClick={() => {
-                                setForm({ ...form, domain: domain });
-                                setChooseDomainOpen(false);
-                              }}
-                              className="px-5 py-3 hover:bg-white/5 rounded-md transition-all cursor-pointer"
-                            >
-                              <span className="text-white/70 text-sm">
-                                {domain}
-                              </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+              <div className="flex items-center space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+
+                <span className="text-sm text-slate-700">
+                  Campus 14, KiiT University
+                </span>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="mt-7 bg-black/10 px-6 py-7 font-montserrat">
-          <div>
-            <span className="text-gray-300 font-semibold ">
-              Team lead details
-            </span>
-          </div>
-          <div className="lg:flex justify-end mt-5 lg:mt-0">
-            <div className="space-y-4">
-              <input
-                placeholder="Name"
-                id="teamLeaderName"
-                value={form.teamLeaderName}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    teamLeaderName: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Roll number"
-                id="teamLeaderRoll"
-                value={form.teamLeaderRoll}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    teamLeaderRoll: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Email address"
-                id="teamLeaderEmail"
-                value={form.teamLeaderEmail}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    teamLeaderEmail: e.target.value,
-                  });
-                }}
-                type={"email"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
+            <div className="mt-10 pt-10 flex items-center space-x-6 border-t">
+              <button className="bg-indigo-500 hover:bg-indigo-600 shadow px-4 py-3 text-white rounded-md transition-all duration-200 text-sm">
+                Contact us
+              </button>
+              <button className="flex items-center justify-center px-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-instagram"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                </svg>
+              </button>
+              <button className="flex items-center justify-center px-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-facebook"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
-        <div className="mt-7 bg-black/10 px-6 py-7 font-montserrat">
-          <div>
-            <span className="text-gray-300 font-semibold ">
-              Member 2 details
-            </span>
-          </div>
-          <div className="lg:flex justify-end mt-5 lg:mt-0">
-            <div className="space-y-4">
-              <input
-                placeholder="Name"
-                value={form.member2Name}
-                id="member2Name"
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member2Name: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Roll number"
-                id="member2Roll"
-                value={form.member2Roll}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member2Roll: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Email address"
-                id="member2Email"
-                value={form.member2Email}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member2Email: e.target.value,
-                  });
-                }}
-                type={"email"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-            </div>
-          </div>
+      </div>
+      <div className="w-full h-full overflow-hidden py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
+        <div className="flex uppercase justify-between">
+          <span className="text-xs tracking-widest">REGISTER</span>
+          <span className="text-xs tracking-widest">STEP {step} / 4</span>
         </div>
-        <div className="mt-7 bg-black/10 px-6 py-7 font-montserrat">
-          <div>
-            <span className="text-gray-300 font-semibold ">
-              Member 3 details
-            </span>
-          </div>
-          <div className="lg:flex justify-end mt-5 lg:mt-0">
-            <div className="space-y-4">
-              <input
-                placeholder="Name"
-                id="member3Name"
-                value={form.member3Name}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member3Name: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Roll number"
-                id="member3Roll"
-                value={form.member3Roll}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member3Roll: e.target.value,
-                  });
-                }}
-                type={"text"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-              <input
-                placeholder="Email address"
-                id="member3Email"
-                value={form.member3Email}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    member3Email: e.target.value,
-                  });
-                }}
-                type={"email"}
-                className="w-full lg:w-96 h-14 outline-none focus-within:bg-white/10 placeholder-white/50 bg-white/5 rounded-md flex items-center px-6 r text-white/90 transition-all"
-              />
-            </div>
-          </div>
+        <div className="mt-10 lg:mt-20">
+          {step == 1 ? (
+            <ChooseDomain
+              form={form}
+              setForm={setForm}
+              setStep={setStep}
+              step={step}
+            />
+          ) : step == 2 ? (
+            <TeamLeader
+              form={form}
+              setForm={setForm}
+              setStep={setStep}
+              step={step}
+            />
+          ) : step == 3 ? (
+            <Member2
+              setStep={setStep}
+              step={step}
+              form={form}
+              setForm={setForm}
+            />
+          ) : (
+            <Member3
+              setStep={setStep}
+              step={step}
+              form={form}
+              setForm={setForm}
+            />
+          )}
         </div>
-        <div className="mt-7 flex justify-end font-montserrat">
-          <button
-            type="submit"
-            className="bg-white text-black px-10 py-3 mt-7 mr-6 lg:mr-0 font-medium rounded"
-          >
-            Register
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
