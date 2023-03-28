@@ -35,7 +35,7 @@ export default function Home() {
               className="w-[100%] h-[250px] object-cover rounded-xl shadow-slate-300"
             />
           </div>
-          <div className="px-8 mt-5">
+          <div className="px-8 mt-3 lg:mt-5">
             <h1 className="text-2xl font-semibold text-slate-800">
               An amazing event name here !
             </h1>
