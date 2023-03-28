@@ -72,10 +72,10 @@ function Member2({ step, setStep, form, setForm }) {
           />
         </div>
       </div>
-      <p className="h-10 mt-7 text-sm tracking-wide flex items-center text-red-500 px-3">
+      <p className="h-10 mt-4 text-sm tracking-wide flex items-center text-red-500 px-3">
         {errorMessage}
       </p>
-      <div className="flex items-center justify-between mt-10">
+      <div className="flex items-center justify-between mt-7 lg:mt10">
         <button
           onClick={() => {
             setStep(step - 1);

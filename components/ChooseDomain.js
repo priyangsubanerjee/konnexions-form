@@ -66,7 +66,7 @@ function ChooseDomain({ setStep, step, form, setForm }) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-end mt-10">
+      <div className="flex items-center justify-end mt-7 lg:mt10">
         <button
           disabled={form.domain.length == 0}
           onClick={() => {
