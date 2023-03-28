@@ -25,8 +25,8 @@ export default function Home() {
     member3Email: "",
   });
   return (
-    <div className="h-screen w-screen overflow-auto lg:overflow-hidden fixed inset-0 bg-white lg:flex lg:items-center">
-      <div className="lg:block lg:w-[700px] shrink-0 bg-transparent lg:h-full h-fit lg:overflow-hidden lg:p-8">
+    <div className="lg:h-screen h-fit w-screen lg:overflow-hidden lg:fixed lg:inset-0 bg-white lg:flex lg:items-center">
+      <div className="block lg:w-[700px] shrink-0 bg-transparent lg:h-full h-fit lg:overflow-hidden lg:p-8">
         <div className="bg-slate-100 w-full h-full lg:rounded-xl overflow-hidden pb-8">
           <div className="flex items-center justify-center p-6">
             <img

@@ -14,9 +14,9 @@ const addResponse = async (data) => {
       createResponse(
         data: {
           domain: "${formData.domain}"
-          leadEmailId: "${formData.teamLeaderEmail}"
-          leadName: "${formData.teamLeaderName}"
-          leadRoll: "${formData.teamLeaderRoll}"
+          leadEmailId: "${formData.leaderEmail}"
+          leadName: "${formData.leaderName}"
+          leadRoll: "${formData.leaderRoll}"
           member2Email: "${formData.member2Email}"
           member2Name: "${formData.member2Name}"
           member2Roll: "${formData.member2Roll}"
@@ -39,12 +39,46 @@ const addResponse = async (data) => {
       data: createResponse,
     };
   } catch (error) {
-    console.log(error);
-    return {
-      success: false,
-      message: error.response.errors[0].message,
-      data: null,
-    };
+    const message = error.response.errors[0].message;
+    const member = message.match(/"(.*?)"/)[1];
+
+    switch (member) {
+      case "leadEmailId":
+        return {
+          success: false,
+          message: "Leader already registered",
+        };
+      case "leadRoll":
+        return {
+          success: false,
+          message: "Leader already registered",
+        };
+      case "member2Email":
+        return {
+          success: false,
+          message: "Member 2 already registered",
+        };
+      case "member2Roll":
+        return {
+          success: false,
+          message: "Member 2 already registered",
+        };
+      case "member3Email":
+        return {
+          success: false,
+          message: "Member 3 already registered",
+        };
+      case "member3Roll":
+        return {
+          success: false,
+          message: "Member 3 already registered",
+        };
+      default:
+        return {
+          success: false,
+          message: "Something went wrong",
+        };
+    }
   }
 };
 

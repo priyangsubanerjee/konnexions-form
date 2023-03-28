@@ -1,3 +1,4 @@
+import { addResponse } from "@/helper/graph";
 import React, { useState, useEffect } from "react";
 
 function Member3({ step, setStep, form, setForm }) {
@@ -100,7 +101,10 @@ function Member3({ step, setStep, form, setForm }) {
         </button>
         <button
           disabled={!canProceed}
-          onClick={() => {}}
+          onClick={async () => {
+            const res = await addResponse(JSON.stringify(form));
+            console.log(res);
+          }}
           className="flex disabled:opacity-50 items-center space-x-3 bg-indigo-500 hover:bg-indigo-600 shadow px-4 py-3 text-white rounded transition-all duration-200 text-sm"
         >
           <span>Complete registration</span>

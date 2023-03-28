@@ -14,7 +14,7 @@ function ChooseDomain({ setStep, step, form, setForm }) {
         >
           Select domain
         </label>
-        <div className="lg:w-[70%] h-full mt-3">
+        <div className="lg:w-[70%] h-full mt-3 lg:mt-0">
           <div
             onClick={() => {
               setChooseDomain(!chooseDomain);
