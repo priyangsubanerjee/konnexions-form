@@ -120,6 +120,7 @@ function Member3({ step, setStep, form, setForm, loading, setLoading }) {
                 member3Roll: "",
                 member3Email: "",
               });
+              setStep(5);
             } else {
               setLoading(false);
               toast.error(res.message);

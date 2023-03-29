@@ -10,6 +10,7 @@ import TeamLeader from "@/components/TeamLeader";
 import Member2 from "@/components/Member2";
 import Member3 from "@/components/Member3";
 import Loading from "@/components/Loading";
+import RegisteredSuccessfully from "@/components/RegisteredSuccessfully";
 
 export default function Home() {
   const [step, setStep] = useState(1);
@@ -117,7 +118,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full min-h-screen lg:h-full overflow-hidden pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
+      <div className="w-full min-h-screen lg:static sticky top-0 inset-x-0 lg:h-full overflow-hidden pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
         <div className="flex uppercase justify-between">
           <span className="text-xs tracking-widest">REGISTER</span>
           <span className="text-xs tracking-widest">STEP {step} / 4</span>
@@ -144,8 +145,17 @@ export default function Home() {
               form={form}
               setForm={setForm}
             />
-          ) : (
+          ) : step == 4 ? (
             <Member3
+              setStep={setStep}
+              step={step}
+              form={form}
+              setForm={setForm}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          ) : (
+            <RegisteredSuccessfully
               setStep={setStep}
               step={step}
               form={form}
