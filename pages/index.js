@@ -29,8 +29,8 @@ export default function Home() {
   });
   return (
     <div className="lg:h-screen h-fit w-screen lg:overflow-hidden lg:fixed lg:inset-0 bg-white lg:flex lg:items-center">
-      <div className="block lg:w-[700px] shrink-0 bg-transparent lg:h-full h-fit lg:overflow-hidden lg:p-8">
-        <div className="bg-slate-100 w-full h-full lg:rounded-xl overflow-hidden pb-8">
+      <div className="block lg:w-[500px] shrink-0 bg-transparent lg:h-full h-fit lg:p-8">
+        <div className="bg-slate-100 w-full h-[95%] lg:h-full lg:rounded-xl overflow-auto pb-8">
           <div className="flex items-center justify-center p-6">
             <img
               src="https://blog.hyperiondev.com/wp-content/uploads/2019/02/Blog-Tech-Events.jpg"
@@ -82,7 +82,7 @@ export default function Home() {
                 </svg>
 
                 <span className="text-sm text-slate-700">
-                  Campus 14, KiiT University
+                  Campus 14, Event location
                 </span>
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full min-h-screen lg:h-full overflow-hidden pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
+      <div className="w-full min-h-screen lg:h-full overflow-hidden lg:overflow-auto pb-32 py-6 lg:py-16 px-5 lg:px-8 mt-5 lg:mt-0">
         <div className="flex uppercase justify-between">
           <span className="text-xs tracking-widest">REGISTER</span>
           <span className="text-xs tracking-widest">STEP {step} / 4</span>
